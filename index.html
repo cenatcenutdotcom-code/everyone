@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pesan Rahasia 💌</title>
+
+<style>
+body{
+    margin:0;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ffd6e7,#ffeccf);
+    font-family:'Comic Sans MS',sans-serif;
+    padding:20px;
+    box-sizing:border-box;
+}
+
+.page{
+    display:none;
+    text-align:center;
+    background:white;
+    padding:40px 25px;
+    border-radius:25px;
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+    width:100%;
+    max-width:350px;
+    animation:fade .5s;
+}
+
+.page.active{
+    display:block;
+}
+
+h2{
+    color:#ff5c9a;
+}
+
+button{
+    margin-top:20px;
+    padding:12px 25px;
+    border:none;
+    border-radius:50px;
+    background:#ff7eb3;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    transform:scale(1.08);
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="page active">
+    <h2>💌 Hai</h2>
+    <p>Masih marah?</p>
+    <button onclick="nextPage(0)">Coba Klik</button>
+</div>
+
+<div class="page">
+    <h2>🤭</h2>
+    <p>Yakin masih marah?</p>
+    <button onclick="nextPage(1)">Klik</button>
+</div>
+
+<div class="page">
+    <p>Klik aja terus 😆</p>
+    <button onclick="nextPage(2)">Terus</button>
+</div>
+
+<div class="page">
+    <h2>STOP ✋</h2>
+    <p>Aku mau ngomong...</p>
+    <button onclick="nextPage(3)">Ngomong deh</button>
+</div>
+
+<div class="page">
+    <h2>💭 Aku mikir bentar</h2>
+    <button onclick="nextPage(4)">Udah mikirnya?</button>
+</div>
+
+<div class="page">
+    <h2>🙏 Maaf</h2>
+    <p>Maaf kalau tadi aku salah.</p>
+    <button onclick="nextPage(5)">Trus?</button>
+</div>
+
+<div class="page">
+    <h2>🥺❤️</h2>
+    <p><b>Gitu aja ngambek...</b></p>
+    <p>Kudengerin deh mau cerita apa ✨</p>
+
+    <div style="
+        display:flex;
+        flex-direction:column;
+        gap:12px;
+        align-items:center;
+        margin-top:20px;
+    ">
+        <button id="yesBtn" onclick="maafkan()">
+            Iya ❤️
+        </button>
+
+        <button id="noBtn" onclick="tidakMau()">
+            Engga 😒
+        </button>
+    </div>
+</div>
+
+<script>
+
+function nextPage(index){
+    const pages = document.querySelectorAll(".page");
+    pages[index].classList.remove("active");
+    pages[index + 1].classList.add("active");
+}
+
+let noCount = 0;
+
+function maafkan(){
+
+    document.body.innerHTML = `
+    <div style="
+        min-height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        flex-direction:column;
+        background:linear-gradient(135deg,#ffd6e7,#ffeccf);
+        font-family:'Comic Sans MS',sans-serif;
+        text-align:center;
+        padding:20px;
+    ">
+        <h1>🥰❤️</h1>
+        <h2>Thank You!</h2>
+        <p>Makasih udah maafin aku ✨</p>
+        <p>Kamu baik banget 💖</p>
+    </div>
+    `;
+}
+
+function tidakMau(){
+
+    noCount++;
+
+    if(noCount == 1){
+        alert("Yakin? 🥺");
+    }
+    else if(noCount == 2){
+        alert("Yakin banget nih? 😭");
+    }
+    else if(noCount == 3){
+
+        alert("Beneran yakin? Aku sedih loh 🥹");
+
+        document.getElementById("yesBtn").style.fontSize = "28px";
+        document.getElementById("yesBtn").style.padding = "20px 40px";
+    }
+    else if(noCount == 4){
+
+        alert("Coba pikir lagi 🤭");
+
+        document.getElementById("noBtn").innerHTML = "Iya Banget ❤️❤️";
+        document.getElementById("noBtn").onclick = maafkan;
+
+        document.getElementById("yesBtn").innerHTML = "Iya ❤️";
+    }
+}
+
+</script>
+
+</body>
+</html>
